@@ -17,9 +17,9 @@ wait_time = random.randint(60, 70)
 time.sleep(wait_time)
 
 # left weather change
-pyautogui.moveTo(70, 870)
+pyautogui.click(70, 870)
 
 time.sleep(1)
 
 # right weather change
-pyautogui.moveTo(700, 905)
+pyautogui.click(700, 905)
