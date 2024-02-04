@@ -8,11 +8,22 @@ def refresh():
     time.sleep(0.5)
     pyautogui.press('f5')
 
+pyautogui.moveTo(2, 4, duration=0.5)
+pyautogui.moveTo(10, 23, duration=0.5)
+pyautogui.moveTo(236, 81, duration=0.5)
+pyautogui.click(236, 10)
+
+wait_time = random.randint(1, 4)
+time.sleep(wait_time)
+
+pyautogui.moveTo(75, 715, duration=1)
+
 # left news change
 pyautogui.click(75, 715)
 
 refresh()
-time.sleep(0.2)
+
+pyautogui.moveTo(715, 750, duration=1)
 
 # right news change
 pyautogui.click(715, 750)
