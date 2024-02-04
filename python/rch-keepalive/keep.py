@@ -5,7 +5,7 @@ import random
 # 実行時は Weatherである前提
 
 def refresh():
-    time.sleep(0.3)
+    time.sleep(0.5)
     pyautogui.press('f5')
 
 # left news change
