@@ -4,14 +4,17 @@ import random
 
 # 実行時は Weatherである前提
 
-# LEFT_NEWS = (75, 715)
-# RIGHT_NEWS = (715, 750)
-# LEFT_WEATHER = (70, 870)
-# RIGHT_WEATHER = (700, 905)
-LEFT_NEWS = (60, 850)
-RIGHT_NEWS = (715, 840)
-LEFT_WEATHER = (60, 930)
-RIGHT_WEATHER = (700, 920)
+# type 1-2
+LEFT_NEWS = (75, 760)
+RIGHT_NEWS = (715, 750)
+LEFT_WEATHER = (70, 850)
+RIGHT_WEATHER = (700, 840)
+
+# type 2-3
+# LEFT_NEWS = (60, 850)
+# RIGHT_NEWS = (715, 840)
+# LEFT_WEATHER = (60, 930)
+# RIGHT_WEATHER = (700, 920)
 
 def refresh():
     time.sleep(0.5)
