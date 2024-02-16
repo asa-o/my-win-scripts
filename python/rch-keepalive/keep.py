@@ -4,6 +4,15 @@ import random
 
 # 実行時は Weatherである前提
 
+# LEFT_NEWS = (75, 715)
+# RIGHT_NEWS = (715, 750)
+# LEFT_WEATHER = (70, 870)
+# RIGHT_WEATHER = (700, 905)
+LEFT_NEWS = (60, 850)
+RIGHT_NEWS = (715, 840)
+LEFT_WEATHER = (60, 930)
+RIGHT_WEATHER = (700, 920)
+
 def refresh():
     time.sleep(0.5)
     pyautogui.press('f5')
@@ -16,17 +25,17 @@ pyautogui.click(236, 10)
 wait_time = random.randint(1, 4)
 time.sleep(wait_time)
 
-pyautogui.moveTo(75, 715, duration=1)
+pyautogui.moveTo(LEFT_NEWS, duration=1)
 
 # left news change
-pyautogui.click(75, 715)
+pyautogui.click(LEFT_NEWS)
 
 refresh()
 
-pyautogui.moveTo(715, 750, duration=1)
+pyautogui.moveTo(RIGHT_NEWS, duration=1)
 
 # right news change
-pyautogui.click(715, 750)
+pyautogui.click(RIGHT_NEWS)
 
 refresh()
 
@@ -35,12 +44,12 @@ wait_time = random.randint(60, 70)
 time.sleep(wait_time)
 
 # left weather change
-pyautogui.click(70, 870)
+pyautogui.click(LEFT_WEATHER)
 
 refresh()
 time.sleep(0.2)
 
 # right weather change
-pyautogui.click(700, 905)
+pyautogui.click(RIGHT_WEATHER)
 
 refresh()
