@@ -27,7 +27,9 @@ def randDuration():
 def randWaitTask():
     loopCount = random.randint(1, 10)
     for i in range(loopCount):
-        pyautogui.moveTo(random.randint(1, 800), random.randint(1, 1000), duration=randDuration())
+        pyautogui.moveTo(random.randint(1, 200), random.randint(700, 1000), duration=randDuration())
+        pyautogui.moveTo(random.randint(600, 800), random.randint(700, 1000), duration=randDuration())
+        pyautogui.moveTo(random.randint(600, 800), random.randint(1, 300), duration=randDuration())
 
 pyautogui.moveTo(2, 4, duration=randDuration())
 pyautogui.moveTo(10, 23, duration=randDuration())
