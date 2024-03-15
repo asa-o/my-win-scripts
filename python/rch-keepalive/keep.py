@@ -23,6 +23,12 @@ def refresh():
 def randDuration():
     return random.randint(10, 100) / 10
 
+# 待機中はランダムにマウスを動かす
+def randWaitTask():
+    loopCount = random.randint(1, 10)
+    for i in range(loopCount):
+        pyautogui.moveTo(random.randint(1, 800), random.randint(1, 1000), duration=randDuration())
+
 pyautogui.moveTo(2, 4, duration=randDuration())
 pyautogui.moveTo(10, 23, duration=randDuration())
 pyautogui.moveTo(236, 81, duration=randDuration())
