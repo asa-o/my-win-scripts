@@ -25,16 +25,17 @@ def randDuration():
 
 # 待機中はランダムにマウスを動かす
 def randWaitTask():
+    pyautogui.moveTo(2, 4, duration=randDuration())
+    pyautogui.moveTo(10, 23, duration=randDuration())
+    pyautogui.moveTo(236, 81, duration=randDuration())
+    pyautogui.click(236, 10)
+
     loopCount = random.randint(1, 10)
     for i in range(loopCount):
         pyautogui.moveTo(random.randint(1, 200), random.randint(700, 1000), duration=randDuration())
         pyautogui.moveTo(random.randint(600, 800), random.randint(700, 1000), duration=randDuration())
         pyautogui.moveTo(random.randint(600, 800), random.randint(1, 300), duration=randDuration())
 
-pyautogui.moveTo(2, 4, duration=randDuration())
-pyautogui.moveTo(10, 23, duration=randDuration())
-pyautogui.moveTo(236, 81, duration=randDuration())
-pyautogui.click(236, 10)
 
 randWaitTask()
 
