@@ -36,8 +36,7 @@ pyautogui.moveTo(10, 23, duration=randDuration())
 pyautogui.moveTo(236, 81, duration=randDuration())
 pyautogui.click(236, 10)
 
-wait_time = random.randint(1, 300)
-time.sleep(wait_time)
+randWaitTask()
 
 pyautogui.moveTo(LEFT_NEWS, duration=1)
 
