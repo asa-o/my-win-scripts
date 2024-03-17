@@ -19,6 +19,8 @@ RIGHT_WEATHER = (700, 840)
 def refresh():
     time.sleep(0.5)
     pyautogui.press('f5')
+    time.sleep(0.5)
+    pyautogui.press('pageup')
 
 def randDuration():
     return random.randint(10, 100) / 10
