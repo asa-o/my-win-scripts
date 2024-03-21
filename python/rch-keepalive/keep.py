@@ -1,6 +1,7 @@
 import pyautogui
 import time
 import random
+import sys
 
 # 実行時は Weatherである前提
 
@@ -38,8 +39,12 @@ def randWaitTask():
         pyautogui.moveTo(random.randint(600, 800), random.randint(700, 1000), duration=randDuration())
         pyautogui.moveTo(random.randint(600, 800), random.randint(1, 300), duration=randDuration())
 
+args = sys.argv
+isAllowWait = True
 
-randWaitTask()
+
+if (isAllowWait):
+    randWaitTask()
 
 pyautogui.moveTo(LEFT_NEWS, duration=1)
 
