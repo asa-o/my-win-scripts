@@ -42,6 +42,9 @@ def randWaitTask():
 args = sys.argv
 isAllowWait = True
 
+# なんらかの引数があるなら待機なし
+if (2 <= len(args)):
+    isAllowWait = False
 
 if (isAllowWait):
     randWaitTask()
