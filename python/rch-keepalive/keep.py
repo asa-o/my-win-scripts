@@ -65,7 +65,10 @@ refresh()
 
 # いくらかの待機
 wait_time = random.randint(60, 70)
-time.sleep(wait_time)
+if (isAllowWait):
+    time.sleep(wait_time)
+else:
+    time.sleep(5)
 
 # left weather change
 pyautogui.click(LEFT_WEATHER)
