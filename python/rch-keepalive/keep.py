@@ -23,8 +23,9 @@ TAB_COUNT_VIVALDI = 9
 def refresh():
     time.sleep(0.5)
     pyautogui.press('f5')
-    time.sleep(0.5)
+    time.sleep(1.0)
     pyautogui.press('pageup')
+    time.sleep(0.5)
 
 def selectCategory(tabCount):
     for i in range(tabCount):
