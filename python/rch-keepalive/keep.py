@@ -17,11 +17,20 @@ RIGHT_WEATHER = (700, 840)
 # LEFT_WEATHER = (60, 930)
 # RIGHT_WEATHER = (700, 920)
 
+TAB_COUNT_CHROME = 12
+TAB_COUNT_VIVALDI = 9
+
 def refresh():
     time.sleep(0.5)
     pyautogui.press('f5')
     time.sleep(0.5)
     pyautogui.press('pageup')
+
+def selectCategory(tabCount):
+    for i in range(tabCount):
+        pyautogui.press('tab')
+        time.sleep(0.01)
+    pyautogui.press('down')
 
 def randDuration():
     return random.randint(10, 100) / 10
@@ -55,6 +64,7 @@ pyautogui.moveTo(LEFT_NEWS, duration=1)
 pyautogui.click(LEFT_NEWS)
 
 refresh()
+selectCategory(TAB_COUNT_CHROME)
 
 pyautogui.moveTo(RIGHT_NEWS, duration=1)
 
@@ -62,6 +72,7 @@ pyautogui.moveTo(RIGHT_NEWS, duration=1)
 pyautogui.click(RIGHT_NEWS)
 
 refresh()
+selectCategory(TAB_COUNT_VIVALDI)
 
 # いくらかの待機
 wait_time = random.randint(60, 70)
@@ -74,9 +85,11 @@ else:
 pyautogui.click(LEFT_WEATHER)
 
 refresh()
+selectCategory(TAB_COUNT_CHROME)
 time.sleep(0.2)
 
 # right weather change
 pyautogui.click(RIGHT_WEATHER)
 
 refresh()
+selectCategory(TAB_COUNT_VIVALDI)
