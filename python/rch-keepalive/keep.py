@@ -21,9 +21,9 @@ TAB_COUNT_CHROME = 13
 TAB_COUNT_VIVALDI = 10
 
 def refresh():
-    time.sleep(0.5)
+    time.sleep(0.7)
     pyautogui.press('f5')
-    time.sleep(1.0)
+    time.sleep(1.5)
     pyautogui.press('pageup')
     time.sleep(0.5)
 
