@@ -5,6 +5,11 @@ import sys
 
 # 実行時は Weatherである前提
 
+LEFT_CLOSE = (595, 32)
+LEFT_BOOT = (558, 1030)
+RIGHT_CLOSE = (1304, 32)
+RIGHT_BOOT = (508, 1030)
+
 # type 1-2
 LEFT_NEWS = (75, 760)
 RIGHT_NEWS = (715, 750)
@@ -17,8 +22,8 @@ RIGHT_WEATHER = (700, 840)
 # LEFT_WEATHER = (60, 930)
 # RIGHT_WEATHER = (700, 920)
 
-TAB_COUNT_CHROME = 13
-TAB_COUNT_VIVALDI = 10
+TAB_COUNT_CHROME = 12
+TAB_COUNT_VIVALDI = 9
 
 def refresh():
     time.sleep(0.7)
@@ -36,6 +41,16 @@ def selectCategory(tabCount):
 def randDuration():
     return random.randint(10, 100) / 10
 
+def reboot():
+    pyautogui.click(LEFT_CLOSE)
+    time.sleep(2)
+    pyautogui.click(LEFT_BOOT)
+    time.sleep(0.1)
+    pyautogui.click(RIGHT_CLOSE)
+    time.sleep(2)
+    pyautogui.click(RIGHT_BOOT)
+    time.sleep(0.1)
+
 # 待機中はランダムにマウスを動かす
 def randWaitTask():
     pyautogui.moveTo(2, 4, duration=randDuration())
@@ -51,13 +66,20 @@ def randWaitTask():
 
 args = sys.argv
 isAllowWait = True
+isRebootTest = False
 
 # なんらかの引数があるなら待機なし
 if (2 <= len(args)):
     isAllowWait = False
+    # 引数が1なら再起動テスト
+    if( args[1] == '1' ):
+        isRebootTest = True
 
 if (isAllowWait):
     randWaitTask()
+
+if(isRebootTest):
+    reboot()
 
 pyautogui.moveTo(LEFT_NEWS, duration=1)
 
