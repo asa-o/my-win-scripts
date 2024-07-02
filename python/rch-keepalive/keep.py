@@ -2,6 +2,9 @@ import pyautogui
 import time
 import random
 import sys
+import time
+
+from datetime import datetime
 
 # 実行時は Weatherである前提
 
@@ -24,6 +27,8 @@ RIGHT_WEATHER = (700, 840)
 
 TAB_COUNT_CHROME = 12
 TAB_COUNT_VIVALDI = 9
+
+REBOOT_HOUR = (0, 12)
 
 def refresh():
     time.sleep(0.7)
@@ -66,19 +71,24 @@ def randWaitTask():
 
 args = sys.argv
 isAllowWait = True
-isRebootTest = False
+isReboot = False
 
-# なんらかの引数があるなら待機なし
+# なんらかの引数があるならテスト起動で待機なし
 if (2 <= len(args)):
     isAllowWait = False
     # 引数が1なら再起動テスト
     if( args[1] == '1' ):
-        isRebootTest = True
+        isReboot = True
+else:
+    # 0時と12時に再起動
+    current_time = datetime.now()
+    if current_time.hour in REBOOT_HOUR:
+        isReboot = True
 
 if (isAllowWait):
     randWaitTask()
 
-if(isRebootTest):
+if(isReboot):
     reboot()
 
 pyautogui.moveTo(LEFT_NEWS, duration=1)
