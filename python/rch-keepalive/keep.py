@@ -25,8 +25,8 @@ RIGHT_WEATHER = (700, 840)
 # LEFT_WEATHER = (60, 930)
 # RIGHT_WEATHER = (700, 920)
 
-TAB_COUNT_CHROME = 13
-TAB_COUNT_VIVALDI = 10
+TAB_COUNT_CHROME = 12
+TAB_COUNT_VIVALDI = 9
 
 REBOOT_HOUR = (0, 12)
 
@@ -42,6 +42,13 @@ def selectCategory(tabCount):
         pyautogui.press('tab')
         time.sleep(0.01)
     pyautogui.press('down')
+
+    pyautogui.press('tab')
+    time.sleep(0.01)
+    pyautogui.press('down')
+
+    pyautogui.press('tab')
+    pyautogui.press('pageup')
 
 def randDuration():
     return random.randint(10, 100) / 10
