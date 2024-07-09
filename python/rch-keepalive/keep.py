@@ -259,7 +259,7 @@ def main():
                 write_timestamp(file)
             else:
                 time_diff = current_time - last_execution
-                if time_diff >= timedelta(minutes=9):
+                if time_diff >= timedelta(seconds=510):
                     print(f"前回の実行から{time_diff.total_seconds() / 60:.2f}分経過しました。処理を実行します。")
                     refresh_and_select_category()
                     write_timestamp(file)
@@ -270,7 +270,7 @@ def main():
                     right_changed = screen_diff(REGION_RIGHT, "right")
 
                     if left_changed == False or right_changed == False:
-                        # 画面が変わっていたらエラーなどの可能性があるので 待機なしで再起動
+                        # 画面が変わっていなかったらエラーなどの可能性があるので 待機なしで再起動
                         print("no changed")
                         keep_alive(False, True)
 
