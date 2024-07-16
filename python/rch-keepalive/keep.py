@@ -254,6 +254,7 @@ def main():
 
         if is_keep_alive:
             keep_alive(is_allow_wait, is_reboot)
+            write_timestamp(file)
         else:
             if last_execution is None:
                 print("初回実行または前回の実行時刻が見つかりません。処理を実行します。")
@@ -275,6 +276,7 @@ def main():
                         # 画面が変わっていなかったらエラーなどの可能性があるので 待機なしで再起動
                         print("no changed")
                         keep_alive(False, True)
+                        write_timestamp(file)
 
                     print(f"前回の実行からまだ{time_diff.total_seconds() / 60:.2f}分しか経過していません。")
 
