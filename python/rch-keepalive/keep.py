@@ -37,6 +37,8 @@ TAB_COUNT_VIVALDI = 9
 
 REBOOT_HOUR = (0, 12)
 
+REFRESH_INTERVAL = 510
+
 SCREENSHOT_DIR = "screenshots"
 
 # スクリーンショット範囲の指定 (左上のx座標, 左上のy座標, 幅, 高さ)
@@ -225,9 +227,9 @@ def main():
     try:
         file, last_execution = acquire_lock_and_read_timestamp()
         args = sys.argv
-        isKeepAlive = False
-        isAllowWait = True
-        isReboot = False
+        is_keep_alive = False
+        is_allow_wait = True
+        is_reboot = False
 
         # ディレクトリの確認と作成
         if not os.path.exists(SCREENSHOT_DIR):
@@ -237,21 +239,21 @@ def main():
 
         # なんらかの引数があるならテスト起動で待機なし
         if (2 <= len(args)):
-            isKeepAlive = True
-            isAllowWait = False
+            is_keep_alive = True
+            is_allow_wait = False
             # 引数が1なら再起動テスト
             if( args[1] == '1' ):
-                isReboot = True
+                is_reboot = True
         else:   # 1分ごとの通常起動
             # 90分ごとにkeepalive処理
             if is_90_minute_interval(current_time):
-                isKeepAlive = True
+                is_keep_alive = True
                 # 0時と12時には再起動
                 if current_time.hour in REBOOT_HOUR:
-                    isReboot = True
+                    is_reboot = True
 
-        if isKeepAlive:
-            keep_alive(isAllowWait, isReboot)
+        if is_keep_alive:
+            keep_alive(is_allow_wait, is_reboot)
         else:
             if last_execution is None:
                 print("初回実行または前回の実行時刻が見つかりません。処理を実行します。")
@@ -259,7 +261,7 @@ def main():
                 write_timestamp(file)
             else:
                 time_diff = current_time - last_execution
-                if time_diff >= timedelta(seconds=510):
+                if time_diff >= timedelta(seconds=REFRESH_INTERVAL):
                     print(f"前回の実行から{time_diff.total_seconds() / 60:.2f}分経過しました。処理を実行します。")
                     refresh_and_select_category()
                     write_timestamp(file)
