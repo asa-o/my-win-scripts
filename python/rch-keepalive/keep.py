@@ -26,7 +26,7 @@ RIGHT_NEWS = (98, 26)
 LEFT_WEATHER = (102, 113)
 RIGHT_WEATHER = (98, 116)
 
-TAB_COUNT_CHROME = 12
+TAB_COUNT_CHROME = 11
 TAB_COUNT_VIVALDI = 9
 
 REBOOT_HOUR = (0, 12)
@@ -168,8 +168,8 @@ def rand_wait_task():
         pyautogui.moveTo(random.randint(600, 800), random.randint(1, 300), duration=rand_duration())
 
 def refresh_and_select_category():
-    left_base_point = find_image("./logo/rc_logo.png", (0, 0, 600, 1050), confidence=0.9)
-    right_base_point = find_image("./logo/rc_logo.png", (600, 0, 700, 1050), confidence=0.9)
+    left_base_point = find_image("./logo/nnn_logo.png", (0, 450, 600, 600), confidence=0.9)
+    right_base_point = find_image("./logo/nnn_logo.png", (600, 450, 700, 600), confidence=0.9)
 
     # left weather change
     pyautogui.click(LEFT_WEATHER[0] + left_base_point[0], LEFT_WEATHER[1] + left_base_point[1])
@@ -191,8 +191,8 @@ def keep_alive(isAllowWait, isReboot):
     if(isReboot):
         reboot()
 
-    left_base_point = find_image("./logo/rc_logo.png", (0, 0, 600, 1050), confidence=0.9)
-    right_base_point = find_image("./logo/rc_logo.png", (600, 0, 700, 1050), confidence=0.9)
+    left_base_point = find_image("./logo/nnn_logo.png", (0, 450, 600, 600), confidence=0.9)
+    right_base_point = find_image("./logo/nnn_logo.png", (600, 450, 700, 600), confidence=0.9)
 
     pyautogui.moveTo(x = LEFT_NEWS[0] + left_base_point[0], y = LEFT_NEWS[1] + left_base_point[1] , duration=1)
 
@@ -205,7 +205,7 @@ def keep_alive(isAllowWait, isReboot):
     pyautogui.moveTo(x=RIGHT_NEWS[0] + right_base_point[0], y=RIGHT_NEWS[1] + right_base_point[1], duration=1)
 
     # right news change
-    pyautogui.click(RIGHT_NEWS[0] + right_base_point[0], RIGHT_NEWS[1] + right_base_point[1])
+    pyautogui.click(x=RIGHT_NEWS[0] + right_base_point[0], y=RIGHT_NEWS[1] + right_base_point[1])
 
     refresh()
     select_category(TAB_COUNT_VIVALDI)
