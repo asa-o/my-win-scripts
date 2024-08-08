@@ -29,7 +29,8 @@ RIGHT_WEATHER = (98, 116)
 TAB_COUNT_CHROME = 11
 TAB_COUNT_VIVALDI = 9
 
-REBOOT_HOUR = (0, 12)
+#REBOOT_HOUR = (0, 12)
+REBOOT_HOUR = (0)
 
 REFRESH_INTERVAL = 510
 
@@ -146,13 +147,13 @@ def rand_duration():
 
 def reboot():
     pyautogui.click(LEFT_CLOSE)
-    time.sleep(2)
+    time.sleep(2.5)
     pyautogui.click(LEFT_BOOT)
-    time.sleep(0.1)
+    time.sleep(0.3)
     pyautogui.click(RIGHT_CLOSE)
-    time.sleep(2)
+    time.sleep(2.5)
     pyautogui.click(RIGHT_BOOT)
-    time.sleep(0.1)
+    time.sleep(0.3)
 
 # 待機中はランダムにマウスを動かす
 def rand_wait_task():
@@ -192,7 +193,6 @@ def keep_alive(isAllowWait, isReboot):
         reboot()
 
     left_base_point = find_image("./logo/nnn_logo.png", (0, 450, 600, 600), confidence=0.9)
-    right_base_point = find_image("./logo/nnn_logo.png", (600, 450, 700, 600), confidence=0.9)
 
     pyautogui.moveTo(x = LEFT_NEWS[0] + left_base_point[0], y = LEFT_NEWS[1] + left_base_point[1] , duration=1)
 
@@ -201,6 +201,8 @@ def keep_alive(isAllowWait, isReboot):
 
     refresh()
     select_category(TAB_COUNT_CHROME)
+
+    right_base_point = find_image("./logo/nnn_logo.png", (600, 450, 700, 600), confidence=0.9)
 
     pyautogui.moveTo(x=RIGHT_NEWS[0] + right_base_point[0], y=RIGHT_NEWS[1] + right_base_point[1], duration=1)
 
