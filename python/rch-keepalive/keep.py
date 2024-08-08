@@ -30,7 +30,7 @@ TAB_COUNT_CHROME = 11
 TAB_COUNT_VIVALDI = 9
 
 #REBOOT_HOUR = (0, 12)
-REBOOT_HOUR = (0)
+REBOOT_HOUR = (0, )
 
 REFRESH_INTERVAL = 510
 
@@ -272,7 +272,7 @@ def main():
             # 90分ごとにkeepalive処理
             if is_90_minute_interval(current_time):
                 is_keep_alive = True
-                # 0時と12時には再起動
+                # 0時には再起動
                 if current_time.hour in REBOOT_HOUR:
                     is_reboot = True
 
