@@ -162,7 +162,10 @@ def rand_wait_task():
         pyautogui.moveTo(random.randint(600, 800), random.randint(700, 1000), duration=rand_duration())
         pyautogui.moveTo(random.randint(600, 800), random.randint(1, 300), duration=rand_duration())
 
-def refresh_and_select_category(left_base_point, right_base_point):
+def refresh_and_select_category():
+    left_base_point = find_image("./logo/rc_logo.png", (0, 0, 600, 1050), confidence=0.9)
+    right_base_point = find_image("./logo/rc_logo.png", (600, 0, 700, 1050), confidence=0.9)
+
     # left weather change
     pyautogui.click(LEFT_WEATHER[0] + left_base_point[0], LEFT_WEATHER[1] + left_base_point[1])
 
@@ -176,12 +179,15 @@ def refresh_and_select_category(left_base_point, right_base_point):
     refresh()
     select_category(TAB_COUNT_VIVALDI)
 
-def keep_alive(isAllowWait, isReboot, left_base_point, right_base_point):
+def keep_alive(isAllowWait, isReboot):
     if (isAllowWait):
         rand_wait_task()
 
     if(isReboot):
         reboot()
+
+    left_base_point = find_image("./logo/rc_logo.png", (0, 0, 600, 1050), confidence=0.9)
+    right_base_point = find_image("./logo/rc_logo.png", (600, 0, 700, 1050), confidence=0.9)
 
     pyautogui.moveTo(x = LEFT_NEWS[0] + left_base_point[0], y = LEFT_NEWS[1] + left_base_point[1] , duration=1)
 
@@ -205,6 +211,9 @@ def keep_alive(isAllowWait, isReboot, left_base_point, right_base_point):
         time.sleep(wait_time)
     else:
         time.sleep(5)
+
+    left_base_point = find_image("./logo/rc_logo.png", (0, 0, 600, 1050), confidence=0.9)
+    right_base_point = find_image("./logo/rc_logo.png", (600, 0, 700, 1050), confidence=0.9)
 
     # left weather change
     pyautogui.click(LEFT_WEATHER[0] + left_base_point[0], LEFT_WEATHER[1] + left_base_point[1])
@@ -260,22 +269,19 @@ def main():
                 if current_time.hour in REBOOT_HOUR:
                     is_reboot = True
 
-        left_base_point = find_image("./logo/rc_logo.png", (0, 0, 600, 1050), confidence=0.9)
-        right_base_point = find_image("./logo/rc_logo.png", (600, 0, 700, 1050), confidence=0.9)
-
         if is_keep_alive:
-            keep_alive(is_allow_wait, is_reboot, left_base_point, right_base_point)
+            keep_alive(is_allow_wait, is_reboot)
             write_timestamp(file)
         else:
             if last_execution is None:
                 print("初回実行または前回の実行時刻が見つかりません。処理を実行します。")
-                refresh_and_select_category(left_base_point, right_base_point)
+                refresh_and_select_category()
                 write_timestamp(file)
             else:
                 time_diff = current_time - last_execution
                 if time_diff >= timedelta(seconds=REFRESH_INTERVAL):
                     print(f"前回の実行から{time_diff.total_seconds() / 60:.2f}分経過しました。処理を実行します。")
-                    refresh_and_select_category(left_base_point, right_base_point)
+                    refresh_and_select_category()
                     write_timestamp(file)
 
                 else:
@@ -286,7 +292,7 @@ def main():
                     if left_changed == False or right_changed == False:
                         # 画面が変わっていなかったらエラーなどの可能性があるので 待機なしで再起動
                         print("no changed")
-                        keep_alive(False, True, left_base_point, right_base_point)
+                        keep_alive(False, True)
                         write_timestamp(file)
 
                     print(f"前回の実行からまだ{time_diff.total_seconds() / 60:.2f}分しか経過していません。")
