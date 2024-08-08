@@ -21,10 +21,10 @@ RIGHT_CLOSE = (1304, 32)
 RIGHT_BOOT = (508, 1030)
 
 # 各ch 基準点からの座標
-LEFT_NEWS = (91, 607)
-RIGHT_NEWS = (97, 662)
-LEFT_WEATHER = (101, 697)
-RIGHT_WEATHER = (107, 747)
+LEFT_NEWS = (102, 28)
+RIGHT_NEWS = (98, 26)
+LEFT_WEATHER = (102, 113)
+RIGHT_WEATHER = (98, 116)
 
 TAB_COUNT_CHROME = 12
 TAB_COUNT_VIVALDI = 9
@@ -43,12 +43,17 @@ TIMESTAMP_FILE = "lastRefresh.lockfile"
 
 def find_image(image_path, region, confidence=0.8):
     # 画像の位置を探す
-    location = pyautogui.locateOnScreen(image_path, region=region, confidence=confidence)
-    if location:
-        print(location)
-        return (location.left, location.top)
-    else:
-        print(f"Image {image_path} not found on screen.")
+    try:
+        location = pyautogui.locateOnScreen(image_path, region=region, confidence=confidence)
+        if location:
+            print(location)
+            return (location.left, location.top)
+        else:
+            print(f"Image {image_path} not found on screen.")
+    except:
+            print(f"Image {image_path} not found on screen.")
+
+    return (0, 0)
 
 def acquire_lock_and_read_timestamp():
     if not os.path.exists(TIMESTAMP_FILE):
@@ -212,8 +217,8 @@ def keep_alive(isAllowWait, isReboot):
     else:
         time.sleep(5)
 
-    left_base_point = find_image("./logo/rc_logo.png", (0, 0, 600, 1050), confidence=0.9)
-    right_base_point = find_image("./logo/rc_logo.png", (600, 0, 700, 1050), confidence=0.9)
+    left_base_point = find_image("./logo/nnn_logo.png", (0, 450, 600, 600), confidence=0.9)
+    right_base_point = find_image("./logo/nnn_logo.png", (600, 450, 700, 600), confidence=0.9)
 
     # left weather change
     pyautogui.click(LEFT_WEATHER[0] + left_base_point[0], LEFT_WEATHER[1] + left_base_point[1])
@@ -257,9 +262,9 @@ def main():
                 is_reboot = True
             elif( args[1] == 'find_image' ):
                 print("left logo find_image")
-                find_image("./logo/rc_logo.png", (0, 0, 600, 1050), confidence=0.9)
+                find_image("./logo/nnn_logo.png", (0, 450, 600, 600), confidence=0.9)
                 print("right logo find_image")
-                find_image("./logo/rc_logo.png", (600, 0, 700, 1050), confidence=0.9)
+                find_image("./logo/nnn_logo.png", (600, 450, 700, 600), confidence=0.9)
                 return
         else:   # 1分ごとの通常起動
             # 90分ごとにkeepalive処理
