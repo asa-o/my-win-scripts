@@ -1,10 +1,17 @@
+import sys
+
+sys.dont_write_bytecode = True
+
 import pyautogui
 import time
 import random
-import sys
 import time
 import numpy as np
 import cv2
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+import settings
 
 from datetime import datetime
 from datetime import timedelta
@@ -59,6 +66,26 @@ def find_image(image_path, region, confidence=0.8):
         print(f"Image {image_path} not found on screen.")
 
     return (0, 0)
+
+
+def mail_send(subject, body):
+    msg = MIMEMultipart()
+    msg["From"] = settings.from_email
+    msg["To"] = settings.to_email
+    msg["Subject"] = subject
+
+    msg.attach(MIMEText(body, "plain"))
+
+    try:
+        server = smtplib.SMTP("smtp.gmail.com", 587)
+        server.starttls()
+        server.login(settings.smtp_user, settings.smtp_password)
+        server.sendmail(settings.from_email, settings.to_email, msg.as_string())
+        print("Email sent successfully")
+    except Exception as e:
+        print(f"Failed to send email: {e}")
+    finally:
+        server.quit()
 
 
 def acquire_lock_and_read_timestamp():
@@ -360,6 +387,10 @@ def main():
 
                     if left_changed == False or right_changed == False:
                         # 画面が変わっていなかったらエラーなどの可能性があるので 待機なしで再起動
+                        mail_send(
+                            settings.error_subject,
+                            settings.error_body,
+                        )
                         print("no changed")
                         keep_alive(False, True)
                         write_timestamp(file)
