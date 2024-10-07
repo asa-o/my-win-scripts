@@ -33,7 +33,7 @@ RIGHT_NEWS = (98, 26)
 LEFT_WEATHER = (102, 113)
 RIGHT_WEATHER = (98, 116)
 
-TAB_COUNT_CHROME = 11
+TAB_COUNT_CHROME = 12
 TAB_COUNT_VIVALDI = 9
 
 # REBOOT_HOUR = (0, 12)
@@ -389,7 +389,7 @@ def main():
                         # 画面が変わっていなかったらエラーなどの可能性があるので 待機なしで再起動
                         mail_send(
                             settings.error_subject,
-                            settings.error_body,
+                            settings.error_screen_not_changed_body,
                         )
                         print("no changed")
                         keep_alive(False, True)
@@ -398,6 +398,11 @@ def main():
                     print(
                         f"前回の実行からまだ{time_diff.total_seconds() / 60:.2f}分しか経過していません。"
                     )
+    except Exception as e:
+        mail_send(
+            settings.error_subject,
+            settings.error_script_execution_body,
+        )
 
     finally:
         if "file" in locals():
