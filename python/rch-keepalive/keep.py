@@ -27,6 +27,10 @@ LEFT_BOOT = (558, 1030)
 RIGHT_CLOSE = (1304, 32)
 RIGHT_BOOT = (508, 1030)
 
+# 算出に失敗した場合のデフォルト値
+LEFT_BASE_POINT_DEFAULT = (50, 780)
+RIGHT_BASE_POINT_DEFAULT = (666, 830)
+
 # 各ch 基準点からの座標
 LEFT_NEWS = (102, 28)
 RIGHT_NEWS = (98, 26)
@@ -65,7 +69,7 @@ def find_image(image_path, region, confidence=0.8):
     except:
         print(f"Image {image_path} not found on screen.")
 
-    return (0, 0)
+    return (-1, -1)
 
 
 def mail_send(subject, body):
@@ -221,9 +225,14 @@ def refresh_and_select_category():
     left_base_point = find_image(
         "./logo/nnn_logo.png", (0, 450, 600, 600), confidence=0.9
     )
+    if left_base_point[0] == -1:
+        left_base_point = LEFT_BASE_POINT_DEFAULT
+
     right_base_point = find_image(
         "./logo/nnn_logo.png", (600, 450, 700, 600), confidence=0.9
     )
+    if right_base_point[0] == -1:
+        right_base_point = RIGHT_BASE_POINT_DEFAULT
 
     # left weather change
     pyautogui.click(
@@ -253,6 +262,8 @@ def keep_alive(isAllowWait, isReboot):
     left_base_point = find_image(
         "./logo/nnn_logo.png", (0, 450, 600, 600), confidence=0.9
     )
+    if left_base_point[0] == -1:
+        left_base_point = LEFT_BASE_POINT_DEFAULT
 
     pyautogui.moveTo(
         x=LEFT_NEWS[0] + left_base_point[0],
@@ -271,6 +282,8 @@ def keep_alive(isAllowWait, isReboot):
     right_base_point = find_image(
         "./logo/nnn_logo.png", (600, 450, 700, 600), confidence=0.9
     )
+    if right_base_point[0] == -1:
+        right_base_point = RIGHT_BASE_POINT_DEFAULT
 
     pyautogui.moveTo(
         x=RIGHT_NEWS[0] + right_base_point[0],
@@ -296,9 +309,14 @@ def keep_alive(isAllowWait, isReboot):
     left_base_point = find_image(
         "./logo/nnn_logo.png", (0, 450, 600, 600), confidence=0.9
     )
+    if left_base_point[0] == -1:
+        left_base_point = LEFT_BASE_POINT_DEFAULT
+
     right_base_point = find_image(
         "./logo/nnn_logo.png", (600, 450, 700, 600), confidence=0.9
     )
+    if right_base_point[0] == -1:
+        right_base_point = RIGHT_BASE_POINT_DEFAULT
 
     # left weather change
     pyautogui.click(
