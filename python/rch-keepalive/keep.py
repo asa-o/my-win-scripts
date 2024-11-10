@@ -374,9 +374,11 @@ def main():
             # 90分ごとにkeepalive処理
             if is_90_minute_interval(current_time):
                 is_keep_alive = True
+
+                # 定期的な再起動はしばらく保留
                 # 0時には再起動
-                if current_time.hour in REBOOT_HOUR:
-                    is_reboot = True
+                # if current_time.hour in REBOOT_HOUR:
+                #     is_reboot = True
 
         if is_keep_alive:
             keep_alive(is_allow_wait, is_reboot)
