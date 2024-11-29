@@ -44,7 +44,8 @@ TAB_COUNT_TRIAL = 8
 REBOOT_HOUR = (0,)
 
 # REFRESH_INTERVAL = 7200  # 一時的に更新処理なしにしてみる 510
-REFRESH_INTERVAL = 510
+# 更新処理を35分おきに変更
+REFRESH_INTERVAL = 2100
 
 SCREENSHOT_DIR = "screenshots"
 
