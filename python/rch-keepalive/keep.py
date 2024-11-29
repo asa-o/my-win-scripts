@@ -300,8 +300,8 @@ def keep_alive(isAllowWait, isReboot):
     refresh()
     select_category(1)
 
-    # いくらかの待機
-    wait_time = random.randint(60, 70)
+    # いくらかの待機 (1分 → 5分程度に変更)
+    wait_time = random.randint(270, 330)
     if isAllowWait:
         time.sleep(wait_time)
     else:
