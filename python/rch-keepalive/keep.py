@@ -37,7 +37,7 @@ RIGHT_NEWS = (98, 26)
 LEFT_WEATHER = (102, 113)
 RIGHT_WEATHER = (98, 116)
 
-TAB_COUNT_FROM = 7
+TAB_COUNT_FROM = [26, 10]
 TAB_COUNT_TRIAL = 8
 
 # REBOOT_HOUR = (0, 12)
@@ -171,8 +171,8 @@ def refresh():
     time.sleep(0.5)
 
 
-def select_category():
-    for i in range(TAB_COUNT_FROM):
+def select_category(index):
+    for i in range(TAB_COUNT_FROM[index]):
         pyautogui.press("tab")
         time.sleep(0.01)
 
@@ -240,7 +240,7 @@ def refresh_and_select_category():
     )
 
     refresh()
-    select_category()
+    select_category(0)
     time.sleep(0.2)
 
     # right weather change
@@ -249,7 +249,7 @@ def refresh_and_select_category():
     )
 
     refresh()
-    select_category()
+    select_category(1)
 
 
 def keep_alive(isAllowWait, isReboot):
@@ -277,7 +277,7 @@ def keep_alive(isAllowWait, isReboot):
     )
 
     refresh()
-    select_category()
+    select_category(0)
 
     right_base_point = find_image(
         "./logo/nnn_logo.png", (600, 450, 700, 600), confidence=0.9
@@ -297,7 +297,7 @@ def keep_alive(isAllowWait, isReboot):
     )
 
     refresh()
-    select_category()
+    select_category(1)
 
     # いくらかの待機
     wait_time = random.randint(60, 70)
@@ -324,7 +324,7 @@ def keep_alive(isAllowWait, isReboot):
     )
 
     refresh()
-    select_category()
+    select_category(0)
     time.sleep(0.2)
 
     # right weather change
@@ -333,7 +333,7 @@ def keep_alive(isAllowWait, isReboot):
     )
 
     refresh()
-    select_category()
+    select_category(1)
 
 
 def is_90_minute_interval(time):
