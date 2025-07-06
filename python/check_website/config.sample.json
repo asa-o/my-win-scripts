@@ -5,5 +5,9 @@
   "hit_payload": {},
   "not_hit_payload": {},
   "min_interval_seconds": 120,
-  "max_interval_seconds": 300
+  "max_interval_seconds": 300,
+  "window_width": 1280,
+  "window_height": 720,
+  "window_x": 100,
+  "window_y": 100
 }

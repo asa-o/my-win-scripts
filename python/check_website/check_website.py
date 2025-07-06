@@ -18,10 +18,10 @@ def load_config():
         return None
 
 
-def check_website(url, keyword):
+def check_website(url, keyword, launch_args):
     try:
         with sync_playwright() as p:
-            browser = p.chromium.launch(headless=False)
+            browser = p.chromium.launch(headless=False, args=launch_args)
             page = browser.new_page()
             page.goto(url, wait_until="domcontentloaded", timeout=60000)
             content = page.content()
@@ -54,6 +54,13 @@ def main():
     min_interval = config.get("min_interval_seconds", 60)
     max_interval = config.get("max_interval_seconds", 120)
 
+    # ウィンドウ設定
+    width = config.get("window_width", 1280)
+    height = config.get("window_height", 720)
+    x = config.get("window_x", 0)
+    y = config.get("window_y", 0)
+    launch_args = [f"--window-size={width},{height}", f"--window-position={x},{y}"]
+
     if not all([target_url, search_keyword, webhook_url, hit_payload, not_hit_payload]):
         print("エラー: 設定ファイルに必要な項目が不足しています。")
         return
@@ -66,7 +73,7 @@ def main():
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         print(f"[{timestamp}] {target_url} をチェックしています...")
 
-        is_hit = check_website(target_url, search_keyword)
+        is_hit = check_website(target_url, search_keyword, launch_args)
 
         if is_hit is None:
             pass
