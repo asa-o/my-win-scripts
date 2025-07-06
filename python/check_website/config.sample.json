@@ -1,0 +1,9 @@
+{
+  "target_url": "https://localhost:8080/",
+  "search_keyword": "キーワード",
+  "webhook_url": "hook url",
+  "hit_payload": {},
+  "not_hit_payload": {},
+  "min_interval_seconds": 120,
+  "max_interval_seconds": 300
+}
